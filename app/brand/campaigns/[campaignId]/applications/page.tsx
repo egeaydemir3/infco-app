@@ -82,7 +82,7 @@ export default async function CampaignApplicationsPage({ params }: PageProps) {
 
   // Her influencer için ER hesapla (sadece APPROVED içerikler)
   // ÖNCE applicationsWithMetrics tanımlanmalı, sonra kullanılmalı
-  const applicationsWithMetrics = applications.map((application) => {
+  const applicationsWithMetrics = applications.map((application: typeof applications[0]) => {
     const allContents = application.contents
     const approvedContents = allContents.filter((c) => c.status === 'APPROVED')
     
