@@ -20,8 +20,8 @@ type InfluencerPerformance = {
   influencerId: string
   name: string
   email: string
-  category: string
-  followerCount: number
+  category: string | null
+  followerCount: number | null
   totalViews: number
   totalEarning: number
   avgER: number

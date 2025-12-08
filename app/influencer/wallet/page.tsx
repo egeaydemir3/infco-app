@@ -31,7 +31,7 @@ export default async function WalletPage() {
   // Bekleyen içerikleri çek (PENDING status)
   const pendingContents = await prisma.content.findMany({
     where: {
-      influencerId: user.influencerProfile.id,
+      influencerId: user.influencerProfile?.id ?? '',
       status: 'PENDING',
     },
   })

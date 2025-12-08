@@ -100,8 +100,8 @@ export default async function CampaignDetailPage({ params }: PageProps) {
     {
       influencerId: string
       influencerName: string
-      category: string
-      followerCount: number
+      category: string | null
+      followerCount: number | null
       contents: typeof approvedContents
     }
   >()

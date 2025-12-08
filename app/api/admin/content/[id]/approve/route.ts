@@ -104,7 +104,7 @@ export async function POST(request: NextRequest, { params }: RouteParams) {
       })
 
       const balance = txs.reduce(
-        (sum, tx) => sum + (tx.type === 'EARNING' ? tx.amount : -Math.abs(tx.amount)),
+        (sum: number, tx: { type: string; amount: number }) => sum + (tx.type === 'EARNING' ? tx.amount : -Math.abs(tx.amount)),
         0
       )
 
