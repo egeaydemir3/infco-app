@@ -9,7 +9,7 @@ export default async function WalletPage() {
   // Oturum açan kullanıcıyı bul
   const user = await getCurrentUser()
 
-  if (!user || user.role !== 'INFLUENCER') {
+  if (!user || user.role !== 'INFLUENCER' || !user.influencerProfile) {
     return (
       <AccessDenied
         message="Bu alanı görmek için influencer olarak giriş yapmalısınız."
