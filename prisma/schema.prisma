@@ -1,0 +1,165 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  INFLUENCER
+  BRAND
+}
+
+enum UserStatus {
+  PENDING
+  APPROVED
+  REJECTED
+}
+
+enum ContentStatus {
+  PENDING
+  APPROVED
+  REJECTED
+}
+
+model User {
+  id           String     @id @default(cuid())
+  email        String     @unique
+  passwordHash String
+  role         Role
+  status       UserStatus @default(APPROVED)
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
+
+  influencerProfile InfluencerProfile?
+  brandProfile      BrandProfile?
+  wallet            Wallet?
+}
+
+model InfluencerProfile {
+  id           String   @id @default(cuid())
+  userId       String   @unique
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  displayName  String
+  bio          String?
+  category     String?
+  followerCount Int?    // genel toplam, varsa bırak
+  country      String?
+  gender       String?
+  ageRange     String?
+  interests    String?
+
+  city                String?
+  instagramFollowers  Int?
+  tiktokFollowers     Int?
+  youtubeFollowers    Int?
+  instagramUrl        String?
+  tiktokUrl           String?
+  youtubeUrl          String?
+
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  campaignApplications CampaignApplication[]
+  contents            Content[]
+}
+
+model BrandProfile {
+  id          String   @id @default(cuid())
+  userId      String   @unique
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  companyName String
+  website     String?
+  description String?
+  logoUrl     String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  campaigns Campaign[]
+}
+
+model Campaign {
+  id           String   @id @default(cuid())
+  brandId      String
+  brand        BrandProfile @relation(fields: [brandId], references: [id], onDelete: Cascade)
+  title        String
+  description  String
+  platform     String
+  totalPool    Float
+  pricePerView Float
+  maxCpm       Float    @default(0.0)
+  imageUrl     String?
+  status       String   // DRAFT, ACTIVE, ENDED
+  startDate    DateTime
+  endDate      DateTime
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  applications CampaignApplication[]
+  contents     Content[]
+}
+
+model CampaignApplication {
+  id           String   @id @default(cuid())
+  campaignId   String
+  campaign     Campaign @relation(fields: [campaignId], references: [id], onDelete: Cascade)
+  influencerId String
+  influencer   InfluencerProfile @relation(fields: [influencerId], references: [id], onDelete: Cascade)
+  status       String   // PENDING, APPROVED, REJECTED
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  contents Content[]
+}
+
+model Content {
+  id                    String        @id @default(cuid())
+  campaignId             String
+  campaign               Campaign      @relation(fields: [campaignId], references: [id], onDelete: Cascade)
+  influencerId          String
+  influencer            InfluencerProfile @relation(fields: [influencerId], references: [id], onDelete: Cascade)
+  applicationId         String?
+  application           CampaignApplication? @relation(fields: [applicationId], references: [id], onDelete: SetNull)
+  platform              String
+  contentUrl            String
+  postedAt              DateTime
+  lastViewCount         Int            @default(0)
+  lastViewCountCheckedAt DateTime?
+  likes                 Int?
+  comments              Int?
+  shares                Int?
+  followers             Int?
+  views                 Int?
+  status                ContentStatus @default(PENDING)
+  earning               Float         @default(0)
+  createdAt             DateTime      @default(now())
+  updatedAt             DateTime      @updatedAt
+}
+
+model Wallet {
+  id        String   @id @default(cuid())
+  userId    String   @unique
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  balance   Float    @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  transactions WalletTransaction[]
+}
+
+model WalletTransaction {
+  id                String   @id @default(cuid())
+  walletId          String
+  wallet            Wallet   @relation(fields: [walletId], references: [id], onDelete: Cascade)
+  type              String   // EARNING, WITHDRAWAL
+  amount            Float
+  relatedCampaignId String?
+  relatedContentId  String?
+  createdAt         DateTime @default(now())
+}
