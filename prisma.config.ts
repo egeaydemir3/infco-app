@@ -3,6 +3,9 @@
 import "dotenv/config";
 import { defineConfig, env } from "prisma/config";
 
+// DATABASE_URL için fallback değer (generate için gerekli değil)
+const databaseUrl = process.env.DATABASE_URL || "file:./dev.db";
+
 export default defineConfig({
   schema: "prisma/schema.prisma",
   migrations: {
@@ -10,6 +13,6 @@ export default defineConfig({
     seed: "tsx prisma/seed.ts",
   },
   datasource: {
-    url: env("DATABASE_URL"),
+    url: databaseUrl,
   },
 });
