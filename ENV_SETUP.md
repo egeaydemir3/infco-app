@@ -72,3 +72,4 @@ Projede şu environment variable'lar kullanılıyor:
 - Production'da asla `.env` dosyasını commit etmeyin
 - Secret key'ler ve hassas bilgiler için production ortamında güvenli environment variable yönetimi kullanın
 
+

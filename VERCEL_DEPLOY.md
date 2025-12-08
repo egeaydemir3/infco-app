@@ -108,3 +108,4 @@ npx prisma migrate deploy
 - Production'da asla SQLite kullanmayın, PostgreSQL kullanın
 - Supabase connection string'inde password'ü doğru girdiğinizden emin olun
 
+
