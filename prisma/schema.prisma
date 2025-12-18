@@ -13,6 +13,7 @@ datasource db {
 enum Role {
   INFLUENCER
   BRAND
+  ADMIN
 }
 
 enum UserStatus {
@@ -92,7 +93,7 @@ model Campaign {
   description  String
   platform     String
   totalPool    Float
-  pricePerView Float
+  pricePer1000View Float
   maxCpm       Float    @default(0.0)
   imageUrl     String?
   status       String   // DRAFT, ACTIVE, ENDED

@@ -25,7 +25,17 @@ export default async function AdminCampaignsPage() {
   // PENDING_REVIEW kampanyaları çek
   const pendingCampaigns = await prisma.campaign.findMany({
     where: { status: 'PENDING_REVIEW' },
-    include: {
+    select: {
+      id: true,
+      title: true,
+      description: true,
+      platform: true,
+      totalPool: true,
+      pricePer1000View: true,
+      maxCpm: true,
+      startDate: true,
+      endDate: true,
+      status: true,
       brand: {
         select: { companyName: true },
       },

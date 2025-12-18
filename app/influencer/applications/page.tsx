@@ -19,7 +19,7 @@ export default async function ApplicationsPage() {
     )
   }
 
-  // CampaignApplication'ları çek (campaign pricePerView ve contents ile birlikte)
+  // CampaignApplication'ları çek (campaign pricePer1000View ve contents ile birlikte)
   const applications = await prisma.campaignApplication.findMany({
     where: { influencerId: user.influencerProfile.id },
     include: {
@@ -28,7 +28,7 @@ export default async function ApplicationsPage() {
           id: true,
           title: true,
           platform: true,
-          pricePerView: true,
+          pricePer1000View: true,
           brand: {
             select: {
               companyName: true,
@@ -99,7 +99,7 @@ export default async function ApplicationsPage() {
           ...app,
           campaign: {
             ...app.campaign,
-            pricePerView: app.campaign.pricePerView ?? 0,
+            pricePer1000View: app.campaign.pricePer1000View ?? 0,
           },
         }))}
       />

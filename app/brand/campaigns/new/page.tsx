@@ -15,7 +15,7 @@ export default function NewCampaignPage() {
     description: '',
     platform: 'Instagram',
     totalPool: '',
-    pricePerView: '',
+    pricePer1000View: '',
     maxCpm: '15',
     imageUrl: '',
     startDate: '',
@@ -34,7 +34,7 @@ export default function NewCampaignPage() {
         description: formData.description,
         platform: formData.platform,
         totalPool: parseFloat(formData.totalPool),
-        pricePerView: parseFloat(formData.pricePerView),
+        pricePer1000View: parseFloat(formData.pricePer1000View),
         maxCpm: parseFloat(formData.maxCpm),
         startDate: formData.startDate,
         endDate: formData.endDate,
@@ -271,17 +271,17 @@ export default function NewCampaignPage() {
                   />
                 </div>
                 <div>
-                  <label htmlFor="pricePerView" className="block text-sm font-medium text-gray-300 mb-2">
+                  <label htmlFor="pricePer1000View" className="block text-sm font-medium text-gray-300 mb-2">
                     1000 İzlenme Başı Ücret ($)
                   </label>
                   <input
                     type="number"
-                    id="pricePerView"
-                    name="pricePerView"
+                    id="pricePer1000View"
+                    name="pricePer1000View"
                     required
                     min="0"
                     step="0.01"
-                    value={formData.pricePerView}
+                    value={formData.pricePer1000View}
                     onChange={handleChange}
                     className="w-full rounded-lg bg-white/10 border border-white/20 px-4 py-3 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
                     placeholder="1.00"

@@ -109,3 +109,5 @@ npx prisma migrate deploy
 - Supabase connection string'inde password'ü doğru girdiğinizden emin olun
 
 
+
+

@@ -40,7 +40,9 @@ function LoginForm() {
 
       if (response.ok) {
         // Backend'den gelen role'a göre yönlendirme
-        if (data.role === 'BRAND') {
+        if (data.role === 'ADMIN') {
+          router.push('/admin/users');
+        } else if (data.role === 'BRAND') {
           router.push('/brand/dashboard');
         } else if (data.role === 'INFLUENCER') {
           router.push('/influencer/campaigns');

@@ -57,13 +57,13 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ message: 'Geçersiz tarih formatı' }, { status: 400 })
     }
 
-    // Campaign'in var olup olmadığını kontrol et (pricePerView ile birlikte)
+    // Campaign'in var olup olmadığını kontrol et (pricePer1000View ile birlikte)
     const campaign = await prisma.campaign.findUnique({
       where: { id: campaignIdValue },
       select: {
         id: true,
         title: true,
-        pricePerView: true,
+        pricePer1000View: true,
       },
     })
 
@@ -147,10 +147,10 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    // Kazanç hesaplama
+    // Kazanç hesaplama (1000 izlenme başına tutar, views ile çarpıp 1000'e böl)
     const viewsNumber = viewsNum || 0
-    const pricePerView = campaign.pricePerView ?? 0
-    const earning = viewsNumber * pricePerView
+    const pricePer1000View = campaign.pricePer1000View ?? 0
+    const earning = (viewsNumber * pricePer1000View) / 1000
 
     // Content data objesi
     const contentData = {

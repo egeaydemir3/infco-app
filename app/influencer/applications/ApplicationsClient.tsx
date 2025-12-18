@@ -11,7 +11,7 @@ type Application = {
     id: string
     title: string
     platform: string
-    pricePerView: number
+    pricePer1000View: number
     brand: {
       companyName: string
     }

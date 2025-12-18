@@ -10,7 +10,7 @@ type Campaign = {
   description: string
   platform: string
   totalPool: number
-  pricePerView: number
+  pricePer1000View: number
   status: string
   startDate: Date
   endDate: Date
@@ -141,9 +141,9 @@ export default function CampaignsClient({ campaigns }: CampaignsClientProps) {
     return styles[platform] || 'bg-gradient-to-r from-blue-600/30 to-purple-600/30 text-blue-300 border-blue-500/30'
   }
 
-  // CPM hesaplama (1000 izlenme başına fiyat)
-  const calculateCPM = (pricePerView: number) => {
-    return `1.000 izlenme / $${(pricePerView * 1000).toFixed(2)}`
+  // CPM hesaplama (1000 izlenme başına fiyat - zaten 1000 izlenme başına tutar)
+  const calculateCPM = (pricePer1000View: number) => {
+    return `1.000 izlenme / $${pricePer1000View.toFixed(2)}`
   }
 
   // Progress hesaplama (gerçek veri ile)
@@ -288,7 +288,7 @@ export default function CampaignsClient({ campaigns }: CampaignsClientProps) {
                   {/* Alt Satır - Platform Info ve Buton */}
                   <div className="flex justify-between items-center mt-3">
                     <span className="text-xs text-gray-400">
-                      {campaign.platform} • {calculateCPM(campaign.pricePerView)}
+                      {campaign.platform} • {calculateCPM(campaign.pricePer1000View)}
                     </span>
                     <button
                       onClick={(e) => {
@@ -363,11 +363,11 @@ export default function CampaignsClient({ campaigns }: CampaignsClientProps) {
                   Post
                 </span>
               </div>
-              {/* Görüntüleme Başına Ücret */}
+              {/* 1000 İzlenme Başına Ücret */}
               <div className="p-3 rounded-2xl bg-white/5 border border-white/10">
-                <p className="text-xs text-gray-400 mb-1">Görüntüleme Başına</p>
+                <p className="text-xs text-gray-400 mb-1">1000 İzlenme Başına</p>
                 <p className="text-lg text-emerald-400 font-semibold">
-                  ${selectedCampaign.pricePerView.toFixed(4)}
+                  ${selectedCampaign.pricePer1000View.toFixed(2)}
                 </p>
               </div>
             </div>

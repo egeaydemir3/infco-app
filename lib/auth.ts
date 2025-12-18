@@ -30,6 +30,7 @@ export async function getCurrentUser() {
 
 const ADMIN_EMAILS = [
   'admin@infco.app',
+  'admin@infcoapp.com',
   // İstersen buraya daha fazla admin email eklenebilir
 ]
 
@@ -40,7 +41,8 @@ export async function requireAdmin() {
     return { ok: false, reason: 'UNAUTHENTICATED' as const }
   }
 
-  if (!ADMIN_EMAILS.includes(user.email)) {
+  // Role kontrolü: ADMIN role'ü veya admin email listesinde olmalı
+  if (user.role !== 'ADMIN' && !ADMIN_EMAILS.includes(user.email)) {
     return { ok: false, reason: 'FORBIDDEN' as const }
   }
 

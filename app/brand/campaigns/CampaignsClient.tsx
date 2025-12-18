@@ -10,7 +10,7 @@ type Campaign = {
   description: string
   platform: string
   totalPool: number
-  pricePerView: number
+  pricePer1000View: number
   status: string
   startDate: Date
   endDate: Date
@@ -123,7 +123,7 @@ export default function CampaignsClient({ campaigns, brandName }: CampaignsClien
                         {campaign.platform}
                       </span>
                       <span className="text-gray-400 text-xs">
-                        ${campaign.pricePerView.toFixed(4)} / görüntüleme
+                        ${campaign.pricePer1000View.toFixed(2)} / 1000 izlenme
                       </span>
                     </div>
                     <p className="text-gray-400 text-sm">

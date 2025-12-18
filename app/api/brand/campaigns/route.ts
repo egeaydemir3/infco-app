@@ -23,7 +23,7 @@ export async function POST(request: NextRequest) {
 
     // Request body'den alanları al
     const body = await request.json()
-    const { title, description, platform, totalPool, pricePerView, maxCpm, imageUrl, startDate, endDate, type } = body
+    const { title, description, platform, totalPool, pricePer1000View, maxCpm, imageUrl, startDate, endDate, type } = body
 
     // Validation
     if (!title || typeof title !== 'string' || title.trim() === '') {
@@ -47,9 +47,9 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    if (!pricePerView || typeof pricePerView !== 'number' || pricePerView <= 0) {
+    if (!pricePer1000View || typeof pricePer1000View !== 'number' || pricePer1000View <= 0) {
       return NextResponse.json(
-        { message: 'pricePerView is required and must be a positive number' },
+        { message: 'pricePer1000View is required and must be a positive number' },
         { status: 400 }
       )
     }
@@ -96,7 +96,7 @@ export async function POST(request: NextRequest) {
         description: description || '',
         platform: platform.trim(),
         totalPool: totalPool,
-        pricePerView: pricePerView,
+        pricePer1000View: pricePer1000View,
         maxCpm: maxCpmValue,
         imageUrl: normalizedImageUrl,
         status: 'PENDING_REVIEW',

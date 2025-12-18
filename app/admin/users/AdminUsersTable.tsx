@@ -7,7 +7,7 @@ import { formatDate } from '@/lib/format'
 type AdminUser = {
   id: string
   email: string
-  role: 'INFLUENCER' | 'BRAND'
+  role: 'INFLUENCER' | 'BRAND' | 'ADMIN'
   status: string
   createdAt: Date
   influencerProfile?: {

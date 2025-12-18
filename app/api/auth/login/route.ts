@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { cookies } from 'next/headers'
 import prisma from '@/lib/prisma'
+import bcrypt from 'bcrypt'
 
 export async function POST(request: NextRequest) {
   try {
@@ -25,16 +26,19 @@ export async function POST(request: NextRequest) {
     // Debug log
     console.log('LOGIN DEBUG:', {
       email,
-      password,
       requestedRole,
       userFound: !!user,
       userRole: user?.role,
-      passwordHash: user?.passwordHash,
-      passwordMatch: user ? user.passwordHash === password : false,
     })
 
-    // User yoksa veya şifre eşleşmiyorsa
-    if (!user || user.passwordHash !== password) {
+    // User yoksa
+    if (!user) {
+      return NextResponse.json({ message: 'Geçersiz email veya şifre' }, { status: 401 })
+    }
+
+    // Şifre kontrolü (bcrypt ile)
+    const isPasswordValid = await bcrypt.compare(password, user.passwordHash)
+    if (!isPasswordValid) {
       return NextResponse.json({ message: 'Geçersiz email veya şifre' }, { status: 401 })
     }
 
@@ -47,15 +51,18 @@ export async function POST(request: NextRequest) {
     }
 
     // Role kontrolü: Eğer requestedRole varsa, user'ın role'ü ile eşleşmeli
+    // Admin kullanıcılar brand girişinden giriş yapabilir
     if (requestedRole) {
-      const expectedRole = requestedRole === 'influencer' ? 'INFLUENCER' : 'BRAND'
-      if (user.role !== expectedRole) {
-        if (requestedRole === 'influencer') {
+      if (requestedRole === 'influencer') {
+        if (user.role !== 'INFLUENCER') {
           return NextResponse.json(
             { message: 'Bu email influencer hesabı değil' },
             { status: 403 }
           )
-        } else {
+        }
+      } else if (requestedRole === 'brand') {
+        // Brand veya ADMIN role'ü brand girişinden giriş yapabilir
+        if (user.role !== 'BRAND' && user.role !== 'ADMIN') {
           return NextResponse.json(
             { message: 'Bu email brand hesabı değil' },
             { status: 403 }

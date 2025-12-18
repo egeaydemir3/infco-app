@@ -11,7 +11,7 @@ const mockCampaigns = [
     brandName: 'FashionHub',
     platform: 'Instagram',
     totalPool: 50000,
-    pricePerView: 2.5,
+    pricePer1000View: 2.5,
     shortDescription: 'Yeni yaz koleksiyonumuzu tanıtmak için influencer arıyoruz. Genç ve dinamik bir kitleye hitap eden içerikler bekliyoruz.',
     description: 'FashionHub olarak yeni yaz koleksiyonumuzu tanıtmak için siz değerli influencer\'larımızla çalışmak istiyoruz. Bu kampanyada, koleksiyonumuzun öne çıkan parçalarını kullanarak yaratıcı içerikler üretmenizi bekliyoruz. Genç ve dinamik bir kitleye hitap eden, trendleri yakından takip eden bir yaklaşım tercih ediyoruz. İçeriklerinizde ürünlerimizin kalitesini, stilini ve kullanım kolaylığını vurgulamanızı istiyoruz. Kampanya süresince düzenli içerik paylaşımı yapmanız ve markamızla uyumlu bir dil kullanmanız önemlidir.',
   },
@@ -21,7 +21,7 @@ const mockCampaigns = [
     brandName: 'TechWorld',
     platform: 'YouTube',
     totalPool: 75000,
-    pricePerView: 3.0,
+    pricePer1000View: 3.0,
     shortDescription: 'Yeni akıllı telefon modelimizi detaylı bir şekilde inceleyecek tech influencer\'lar arıyoruz.',
     description: 'TechWorld olarak yeni akıllı telefon modelimizi detaylı bir şekilde inceleyecek teknoloji influencer\'larını arıyoruz. Bu kampanyada, telefonun teknik özelliklerini, performansını, kamera kalitesini ve kullanıcı deneyimini kapsamlı bir şekilde ele almanızı bekliyoruz. İnceleme videolarınızda objektif bir yaklaşım sergilemeniz ve hem güçlü yönlerini hem de geliştirilebilecek noktaları dürüstçe paylaşmanız önemlidir. Detaylı testler, karşılaştırmalar ve gerçek kullanım senaryoları içeren içerikler tercih ediyoruz.',
   },
@@ -31,7 +31,7 @@ const mockCampaigns = [
     brandName: 'FitLife',
     platform: 'TikTok',
     totalPool: 30000,
-    pricePerView: 1.5,
+    pricePer1000View: 1.5,
     shortDescription: 'Yeni fitness uygulamamızı kullanarak kısa videolar çekecek influencer\'lar arıyoruz.',
     description: 'FitLife uygulaması olarak yeni fitness programımızı tanıtmak için TikTok influencer\'larını arıyoruz. Bu kampanyada, uygulamamızı kullanarak kısa, etkileyici ve motive edici videolar çekmenizi bekliyoruz. Videolarınızda uygulamanın özelliklerini, antrenman programlarını ve kullanıcı deneyimini eğlenceli bir şekilde göstermeniz önemlidir. Genç ve aktif bir kitleye hitap eden, enerjik ve pozitif bir ton kullanmanızı tercih ediyoruz. Kampanya boyunca düzenli içerik paylaşımı yapmanız beklenmektedir.',
   },
@@ -41,7 +41,7 @@ const mockCampaigns = [
     brandName: 'BeautyGlow',
     platform: 'Instagram',
     totalPool: 40000,
-    pricePerView: 2.0,
+    pricePer1000View: 2.0,
     shortDescription: 'Yeni makyaj ürünlerimizi test edip deneyimlerini paylaşacak beauty influencer\'lar arıyoruz.',
     description: 'BeautyGlow olarak yeni makyaj ürünlerimizi test edip deneyimlerini paylaşacak beauty influencer\'larını arıyoruz. Bu kampanyada, ürünlerimizi kullanarak makyaj tutorial\'ları, before/after karşılaştırmaları ve ürün incelemeleri hazırlamanızı bekliyoruz. İçeriklerinizde ürünlerin renklerini, dokusunu, kalıcılığını ve uygulama kolaylığını detaylı bir şekilde göstermeniz önemlidir. Doğal ışıkta çekimler ve farklı cilt tonlarında testler yapmanızı tercih ediyoruz. Dürüst ve samimi bir yaklaşım sergilemeniz markamız için çok değerlidir.',
   },
@@ -51,7 +51,7 @@ const mockCampaigns = [
     brandName: 'GameStudio',
     platform: 'Twitch',
     totalPool: 100000,
-    pricePerView: 5.0,
+    pricePer1000View: 5.0,
     shortDescription: 'Yeni oyunumuzu canlı yayında oynayacak ve izleyicilere tanıtacak gaming influencer\'lar arıyoruz.',
     description: 'GameStudio olarak yeni oyunumuzu canlı yayında oynayacak ve izleyicilere tanıtacak gaming influencer\'larını arıyoruz. Bu kampanyada, oyunumuzu canlı yayınlarda oynayarak oyunculara tanıtmanızı bekliyoruz. Yayınlarınızda oyunun hikayesini, mekaniklerini, grafiklerini ve genel oynanış deneyimini detaylı bir şekilde ele almanız önemlidir. İzleyicilerle etkileşim kurarak onların sorularını yanıtlamanız ve oyun hakkında samimi görüşlerinizi paylaşmanızı tercih ediyoruz. Kampanya süresince düzenli yayınlar yapmanız beklenmektedir.',
   },
@@ -61,7 +61,7 @@ const mockCampaigns = [
     brandName: 'FoodieBrand',
     platform: 'YouTube',
     totalPool: 35000,
-    pricePerView: 1.8,
+    pricePer1000View: 1.8,
     shortDescription: 'Ürünlerimizi kullanarak yemek tarifleri hazırlayacak food influencer\'lar arıyoruz.',
     description: 'FoodieBrand olarak ürünlerimizi kullanarak yemek tarifleri hazırlayacak food influencer\'larını arıyoruz. Bu kampanyada, ürünlerimizi kullanarak yaratıcı ve lezzetli yemek tarifleri hazırlamanızı bekliyoruz. Videolarınızda tariflerin adım adım hazırlanışını, malzemelerin kullanımını ve sonuçların görsel sunumunu detaylı bir şekilde göstermeniz önemlidir. Yemek kültürüne saygılı, eğitici ve eğlenceli bir yaklaşım sergilemenizi tercih ediyoruz. Kampanya boyunca farklı tarifler ve yemek kategorilerinde içerikler üretmeniz beklenmektedir.',
   },
@@ -131,9 +131,9 @@ export default function CampaignDetailPage() {
               </span>
             </div>
             <div className="text-right">
-              <p className="text-gray-400 text-sm">Görüntüleme Başına</p>
+              <p className="text-gray-400 text-sm">1000 İzlenme Başına</p>
               <p className="text-green-400 font-bold text-2xl">
-                ₺{campaign.pricePerView.toFixed(2)}
+                ₺{(campaign.pricePer1000View ?? 0).toFixed(2)}
               </p>
             </div>
           </div>

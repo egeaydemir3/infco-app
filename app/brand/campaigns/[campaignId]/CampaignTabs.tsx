@@ -50,7 +50,7 @@ type Campaign = {
   title: string
   description: string | null
   maxCpm: number
-  pricePerView: number
+  pricePer1000View: number
   contents: Content[]
 }
 
@@ -75,8 +75,8 @@ export default function CampaignTabs({
   // Ortalama CPM hesapla
   const averageCpm = totalViews > 0 ? (totalEarnings / totalViews) * 1000 : 0
 
-  // Tahmini Earnings (topViews * (pricePerView / 1000)) ama maxCpm'i aşarsa maxCpm'e eşitle
-  const estimatedEarningsRaw = totalViews * (campaign.pricePerView / 1000)
+  // Tahmini Earnings (topViews * pricePer1000View / 1000) ama maxCpm'i aşarsa maxCpm'e eşitle
+  const estimatedEarningsRaw = (totalViews * campaign.pricePer1000View) / 1000
   const estimatedEarnings = campaign.maxCpm > 0 && estimatedEarningsRaw > campaign.maxCpm
     ? campaign.maxCpm
     : estimatedEarningsRaw

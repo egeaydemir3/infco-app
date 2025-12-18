@@ -262,7 +262,7 @@ export default async function CampaignDetailPage({ params }: PageProps) {
             campaign={{
               ...campaign,
               maxCpm: campaign.maxCpm ?? 0,
-              pricePerView: campaign.pricePerView,
+              pricePer1000View: campaign.pricePer1000View,
             }}
             approvedContents={approvedContents}
             influencerPerformances={influencerPerformances}

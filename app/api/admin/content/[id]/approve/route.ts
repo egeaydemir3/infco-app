@@ -29,12 +29,7 @@ export async function POST(request: NextRequest, { params }: RouteParams) {
     const content = await prisma.content.findUnique({
       where: { id: contentId },
       include: {
-        campaign: {
-          select: {
-            id: true,
-            pricePerView: true,
-          },
-        },
+        campaign: true,
         influencer: {
           select: {
             userId: true,
@@ -55,8 +50,8 @@ export async function POST(request: NextRequest, { params }: RouteParams) {
       )
     }
 
-    // Kazancı al
-    const earning = content.earning ?? (content.views || 0) * (content.campaign.pricePerView ?? 0)
+    // Kazancı al (1000 izlenme başına tutar, views ile çarpıp 1000'e böl)
+    const earning = content.earning ?? ((content.views || 0) * (content.campaign.pricePer1000View ?? 0)) / 1000
 
     // Influencer'ın wallet'ını bul veya oluştur
     let wallet = await prisma.wallet.findFirst({

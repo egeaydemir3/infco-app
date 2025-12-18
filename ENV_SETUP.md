@@ -73,3 +73,5 @@ Projede şu environment variable'lar kullanılıyor:
 - Secret key'ler ve hassas bilgiler için production ortamında güvenli environment variable yönetimi kullanın
 
 
+
+

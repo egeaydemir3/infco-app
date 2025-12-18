@@ -10,7 +10,7 @@ type AdminCampaign = {
   description: string | null
   platform: string
   totalPool: number
-  pricePerView: number
+  pricePer1000View: number
   maxCpm: number | null
   startDate: Date
   endDate: Date
@@ -123,7 +123,7 @@ export default function AdminCampaignsTable({ campaigns }: AdminCampaignsTablePr
                     <p className="text-white font-medium">{formatCurrency(campaign.totalPool)}</p>
                   </td>
                   <td className="py-4 px-4">
-                    <p className="text-white font-medium">${campaign.pricePerView.toFixed(4)}</p>
+                    <p className="text-white font-medium">${campaign.pricePer1000View.toFixed(2)} / 1000 izlenme</p>
                   </td>
                   <td className="py-4 px-4">
                     <p className="text-white font-medium">

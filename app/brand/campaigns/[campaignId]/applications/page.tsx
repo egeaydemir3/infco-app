@@ -203,9 +203,9 @@ export default async function CampaignApplicationsPage({ params }: PageProps) {
 
   const averageEr = erValues.length > 0 ? erValues.reduce((sum, v) => sum + v, 0) / erValues.length : 0
 
-  // Tahmini toplam ödeme (sadece APPROVED içerikler)
-  const pricePerView = campaign.pricePerView ?? 0
-  const estimatedPayout = pricePerView * totalViews
+  // Tahmini toplam ödeme (sadece APPROVED içerikler) - 1000 izlenme başına tutar
+  const pricePer1000View = campaign.pricePer1000View ?? 0
+  const estimatedPayout = (totalViews * pricePer1000View) / 1000
 
   // Toplam kazanç (APPROVED içeriklerin earning toplamı)
   const totalEarnings = allApprovedContents.reduce((sum, content) => {

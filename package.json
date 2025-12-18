@@ -6,15 +6,18 @@
     "dev": "next dev",
     "build": "prisma generate && next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "prisma:seed": "tsx prisma/seed.ts"
   },
   "prisma": {
     "seed": "tsx prisma/seed.ts"
   },
   "dependencies": {
     "@prisma/client": "^6.19.0",
+    "@types/bcrypt": "^6.0.0",
+    "bcrypt": "^6.0.0",
     "better-sqlite3": "^12.5.0",
-    "next": "^16.0.8",
+    "next": "16.0.5",
     "prisma": "^6.19.0",
     "react": "19.2.0",
     "react-dom": "19.2.0",
@@ -27,7 +30,7 @@
     "@types/react-dom": "^19",
     "baseline-browser-mapping": "^2.9.5",
     "eslint": "^9",
-    "eslint-config-next": "^16.0.8",
+    "eslint-config-next": "16.0.5",
     "tailwindcss": "^4",
     "tsx": "^4.20.6",
     "typescript": "^5"
